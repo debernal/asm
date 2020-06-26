@@ -2,6 +2,7 @@
 ; Programmer: David Bernal Michelena
 ; Created on June 5, 2007
 ; Must be executed on Win 7 
+; License: CREATIVE COMMONS LICENSE BY-NC https://creativecommons.org/licenses/by-nc/4.0/
 
 GOTOXY MACRO X, Y
     MOV BH, 0	;despliega el numero de pagina
@@ -12,7 +13,7 @@ GOTOXY MACRO X, Y
 ENDM
 
 INIASI MACRO
-	MOV DH, NUMDIS  ; inicializa la variable col en funciÛn del numero de discos col= incol(5) + nd
+	MOV DH, NUMDIS  ; inicializa la variable col en funci√≥n del numero de discos col= incol(5) + nd
 	SUB DH, 30H	;
 	ADD DH, INCOL
 	MOV COL, DH
@@ -20,7 +21,7 @@ INIASI MACRO
 ENDM
 
 INICIACONTADORES MACRO
-			;las variables se inicializan cuando se da la opciÛn reiniciar.
+			;las variables se inicializan cuando se da la opci√≥n reiniciar.
     MOV ROW, 17		;variables torre
     MOV COL, 5
     MOV INCOL, 5
@@ -81,7 +82,7 @@ IMPTIE MACRO
 	push ax		; almacena el valor
 	mov ah,2	; despliega el caracter en pantalla
 	int 21h
-	pop ax		; obtiene el primer dÌgito en la pila
+	pop ax		; obtiene el primer d√≠gito en la pila
 	add ah,30h	; ah puso el residuo y lo convierte a numero
 	mov dl, ah	; imprime
 	mov ah,2	; en pantalla
@@ -213,7 +214,7 @@ REINICIAR:
     
     INICIACONTADORES
     BORRAPANTALLA
-    MOV ROW, 17    ;la macro borrapantalla cambiÛ el valor de row, por eso se iniciliza en 17 nuevamente.
+    MOV ROW, 17    ;la macro borrapantalla cambi√≥ el valor de row, por eso se iniciliza en 17 nuevamente.
     JMP IMPMENSAJES
     
 REINICIAR2:
@@ -252,7 +253,7 @@ FINLIMPIA:
    LEEDISCOS:
     MOV AH, 7
     INT 21H
-    MOV NUMDIS, AL		;lee del teclado el n˙mero de discos y  lo coloca en NUMDIS
+    MOV NUMDIS, AL		;lee del teclado el n√∫mero de discos y  lo coloca en NUMDIS
     CMP NUMDIS, 'R'
     JE REINICIAR3
 	CMP NUMDIS, 'r'
@@ -294,7 +295,7 @@ PALOS:
   	ADD DL, DESP
 	MOV AH, 2 	;configura la pos del cursor
  	int 10h
-  	mov al,'∞'   ;escribe * de color GRIS;
+  	mov al,'¬∞'   ;escribe * de color GRIS;
   	MOV BL, 8  ; EL COLOR DEL PALO INICIAL ES 8, GRIS	 
   	mov cx,1    ; SE  IMPRIME UN CARACTER	 
   	mov ah,9
@@ -318,20 +319,20 @@ TORRE:
   	 mov dl,col   ;numero de columna
   	 inc col
  	 int 10h
-  	 mov al,'∞'   ;escribe * de color;
+  	 mov al,'¬∞'   ;escribe * de color;
   	 MOV BL, 9   ; EL COLOR DEL DISCO INICIAL ES 9, AZUL	 
   	 ADD bl, C1  ; EL COLOR DEL DISCO CAMBIA CADA QUE EL CICLO EXTERNO ITERA
   	 mov cx,1    ; SE  IMPRIME UN CARACTER	 
   	 mov ah,9
   	 int 10h
   	 inc CC		;ES EL CONTADOR DE COLUMNAS DEL CICLO INTERNO
-  	 		;LONGITUD DEL DISCO DE MAYOR TAMA—O = NUMERO DE DISCOS X 2  +1	
+  	 		;LONGITUD DEL DISCO DE MAYOR TAMA√ëO = NUMERO DE DISCOS X 2  +1	
   	 MOV AH, NUMDIS	     ;LON=LONGITUD IZQUIERDA= NUMERO DE DISCOS
-  	 SUB AH, 30H	    ; CONVERSI”N DE CARACTER A N⁄MERO
+  	 SUB AH, 30H	    ; CONVERSI√ìN DE CARACTER A N√öMERO
   	 ADD AH, AH	     ; X2
   	 ADD AH, 1	     ; + 1 
   	 SUB AH, MEN ; LA LONGITUD DE CADA CICLO DISMINUYE EN DOS CADA QUE EL CICLO EX ITERA
-  	 cmp CC,AH   ; COMPARA EL CONTADOR DE COLUMNAS CON EL M¡XIMA PARA ESE CICLO
+  	 cmp CC,AH   ; COMPARA EL CONTADOR DE COLUMNAS CON EL M√ÅXIMA PARA ESE CICLO
   jne CICLO1
 	dec row
 	mov dh, incol
@@ -492,10 +493,10 @@ VALTAM:
 	
 	MOV AH, 8   ;LEE EL ATRIBUTO DEL PIXEL, Y SE GUARDA EN AH
 	INT 10H
-	CMP AH, 8    ;ESTA VACÕA LA TORRE? o TODOS LOS DISCOS VERIFICADOS HAN SIDO MAYORES?
+	CMP AH, 8    ;ESTA VAC√çA LA TORRE? o TODOS LOS DISCOS VERIFICADOS HAN SIDO MAYORES?
 	JE COLOCA1
 	CMP AH, TEMATR  ;SI NO ESTA VACIA COMPARA EL ATRIBUTO DEL DISCO DE LA TORRE DESTINO 
-	JA ERRTAM		;CON EL ATRIBUTO DEL DISCO A MOVER DE LA TORRE ORIGEN. A MENOR TAMA—O, MAYOR ATRIBUTO
+	JA ERRTAM		;CON EL ATRIBUTO DEL DISCO A MOVER DE LA TORRE ORIGEN. A MENOR TAMA√ëO, MAYOR ATRIBUTO
 	DEC ROW
 	JMP VALTAM		
 	
@@ -544,8 +545,8 @@ COLOCA:
     SUB DL, CLON
     GOTOXY DL, ROW
 	 SIGUE:
-	 ;mov al,'∞'   ;coloca el disco en la nueva posicion
-	 MOV DL, '∞'
+	 ;mov al,'¬∞'   ;coloca el disco en la nueva posicion
+	 MOV DL, '¬∞'
 
   	 MOV BL, TEMATR  ; El color nulo es 0 	 
   	 mov cx,1    ; SE  IMPRIME UN CARACTER	 
@@ -610,8 +611,8 @@ BORRA:
     SUB TEMPX, CL
     GOTOXY TEMPX, TEMPY
 	 SIGUE2:
-	 mov al,'∞'   ;borra el disco de su posicion original
-	 MOV DL, '∞'
+	 mov al,'¬∞'   ;borra el disco de su posicion original
+	 MOV DL, '¬∞'
   	 MOV BL, 0  ; El color nulo es 0 	 
   	 mov cx,1    ; SE  IMPRIME UN CARACTER	 
   	 mov ah,9
@@ -627,8 +628,8 @@ BORRA:
   MOV CL, CLON
   ADD TEMPX, CL
   GOTOXY TEMPX, TEMPY
-  	 mov al,'∞'   ;borra el disco de su posicion original
-	 MOV DL, '∞'
+  	 mov al,'¬∞'   ;borra el disco de su posicion original
+	 MOV DL, '¬∞'
   	 MOV BL, 8  ; COLOCA LA PARTE DEL PALO DE LA TORRE DEL DISCO QUITADO 	 
   	 mov cx,1    ; SE  IMPRIME UN CARACTER	 
   	 mov ah,9
@@ -687,7 +688,7 @@ HORA:
 	LEA DX, MENTIE
 	MOV AH, 9
 	INT 21H
-	mov ah, 2ch  ;lee la hora del sistema DESPU…S DE QUE ACAB” EL JUEGO
+	mov ah, 2ch  ;lee la hora del sistema DESPU√âS DE QUE ACAB√ì EL JUEGO
 	int 21h
 	MOV FINHOR, CH
 	MOV FINMIN, CL
